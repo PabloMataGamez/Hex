@@ -42,7 +42,7 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         _camera = Camera.main;
         _canvasParent = FindObjectOfType<Canvas>();
 
-         AddNewCard();
+        // AddNewCard();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {

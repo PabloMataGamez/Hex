@@ -1196,11 +1196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2520824637731983269, guid: 911d5f71516119a42a33ddbcfc20f21b, type: 3}
       propertyPath: m_Name
-      value: Card1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520824637731983269, guid: 911d5f71516119a42a33ddbcfc20f21b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Image
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 911d5f71516119a42a33ddbcfc20f21b, type: 3}
