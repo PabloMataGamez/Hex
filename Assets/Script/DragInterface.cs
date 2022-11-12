@@ -78,10 +78,12 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
 
-        if (IsOverCube())
+        if (IsOverTile())
         {
             _cardManager._cardsInTable--;
             Destroy(this.gameObject);
+
+            Debug.Log("Card dropped");
 
             _cardManager.AddNewCard(this.transform);
         }
@@ -105,7 +107,7 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         return comp;
     }
 
-    private bool IsOverCube()
+    private bool IsOverTile()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, _camera.farClipPlane, _tileLayer))
