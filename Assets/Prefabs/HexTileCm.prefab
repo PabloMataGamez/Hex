@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4181344608626452806}
   - component: {fileID: -6618581458536730723}
   - component: {fileID: -5423091620089648345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HexTileCm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2380120193595803795}
-  m_Mesh: {fileID: 6099800089077584851, guid: 5690dacc0668d0045a23da1a86282b77, type: 3}
+  m_Mesh: {fileID: -5076798556035486163, guid: c8cfb3409f7b4c243b503b2050ba5386, type: 3}
 --- !u!23 &4181344608626452806
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 5690dacc0668d0045a23da1a86282b77, type: 3}
+  - {fileID: 2100000, guid: 26b5f23382b307847b10b17030d469e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

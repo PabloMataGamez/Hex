@@ -11,38 +11,20 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Camera _camera;
 
     [SerializeField] 
-    private LayerMask _cubeLayer;
+    private LayerMask _tileLayer;
 
     private GameObject m_DraggingIcon;
     private RectTransform m_DraggingPlane;
 
-    private int _cardsInTable = 0;
-    private int _totalCards;
-
     [SerializeField]
-    private int _maxTotalCards = 12;
-    [SerializeField]
-    private int _maxCardsInTable = 5;
-
-    [SerializeField]
-    private GameObject _card1;
-    [SerializeField]
-    private GameObject _card2;
-    [SerializeField]
-    private GameObject _card3;
-    [SerializeField]
-    private GameObject _card4;
-
-    [SerializeField]
-    private Canvas _canvasParent;
+    private CardManager _cardManager;
 
 
     private void Awake()
     {
         _camera = Camera.main;
-        _canvasParent = FindObjectOfType<Canvas>();
+        _cardManager = FindObjectOfType<CardManager>();
 
-        // AddNewCard();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -98,10 +80,10 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (IsOverCube())
         {
-            _cardsInTable--;
+            _cardManager._cardsInTable--;
             Destroy(this.gameObject);
 
-            AddNewCard();
+            _cardManager.AddNewCard(this.transform);
         }
     }
 
@@ -126,43 +108,8 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private bool IsOverCube()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, _camera.farClipPlane, _cubeLayer))
+        if (Physics.Raycast(ray, _camera.farClipPlane, _tileLayer))
             return true;
         return false;
-    }
-
-
-    private void AddNewCard()
-    {
-        if (_totalCards < _maxTotalCards && _cardsInTable < _maxCardsInTable)
-        {
-            int random = Random.Range(1, 4);
-
-            if (random == 1)
-            {
-                var newCard = Instantiate(_card1, new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-                    Quaternion.identity, _canvasParent.transform);
-            }
-            else if (random == 2)
-            {
-                var newCard = Instantiate(_card1, new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-                    Quaternion.identity, _canvasParent.transform);
-
-            }
-            else if (random == 3)
-            {
-                var newCard = Instantiate(_card1, new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-                    Quaternion.identity, _canvasParent.transform);
-
-            }
-            else if (random == 4)
-            {
-                var newCard = Instantiate(_card1, new Vector3(transform.position.x, transform.position.y, transform.position.z), 
-                    Quaternion.identity, _canvasParent.transform);
-
-            }
-            _totalCards++;
-            _cardsInTable++;
-        }
-    }
+    }   
 }
