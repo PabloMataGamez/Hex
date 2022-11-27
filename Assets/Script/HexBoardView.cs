@@ -17,45 +17,46 @@ using UnityEngine;
     {
         private List<HexPosition> _activePosition = new List<HexPosition>();
 
+        public event EventHandler<PositionEventArgs> PositionClicked; //Event all listener will be evoked
+
+        //We store HexPositionViews using its HexPosition as key/ID
+        private Dictionary<HexPosition, HexPositionView> _positionViews = new Dictionary<HexPosition, HexPositionView>();
+
         public List<HexPosition> ActivePosition
         {
             set
             {
-                foreach (var position in _activePosition)
+                foreach (var position in _activePosition) //First we deactivate whatever was active before
                 {
                     _positionViews[position].Deactivate();
                 }
 
-                if (value == null)
+                if (value == null) //Clear the list
                     _activePosition.Clear();
                 else
-                    _activePosition = value;
+                    _activePosition = value; 
 
-                foreach (var position in _activePosition)
+                foreach (var position in _activePosition) //Now we activate every hex that should be active
                     _positionViews[position].Activate();
             }
-        }
-
-        public event EventHandler<PositionEventArgs> PositionClicked;
-
-        private Dictionary<HexPosition, HexPositionView> _positionViews = new Dictionary<HexPosition, HexPositionView>();
+        }     
 
         private void OnEnable()
         {
             var positionViews = GetComponentsInChildren<HexPositionView>();
             foreach (var positionView in positionViews)
             {
-                _positionViews.Add(positionView.GridPosition, positionView);
+                _positionViews.Add(positionView.GridPosition, positionView); //Add all the tiles to the list
             }
         }
 
-        internal void ChilClicked(HexPositionView positionView)
+        internal void ChildClicked(HexPositionView positionView) // WHAT DOES THIS DO EXACTLY? IN GAME
         {
             OnPositionClicked(new PositionEventArgs(positionView.GridPosition));
         }
 
-        protected virtual void OnPositionClicked(PositionEventArgs e)
-        {
+        protected virtual void OnPositionClicked(PositionEventArgs e) // WHAT DOES THIS DO EXACTLY? IN GAME
+    {
             var handler = PositionClicked;
             handler.Invoke(this, e);
         }

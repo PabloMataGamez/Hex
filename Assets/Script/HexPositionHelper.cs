@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexPositionHelper : MonoBehaviour
+public class HexPositionHelper : MonoBehaviour // NEED TO BE ADAPTED !!!
 {
     public const int HexRows = 7;
     public const int HexColumns = 7;
     public const int TileSize = 1;
 
-    public static HexPosition GridPosition(Vector3 worldPosition)
+    public static HexPosition GridPosition(Vector3 worldPosition) // NEED TO BE ADAPTED !!!
     {
         var scaleWorldPosition = (worldPosition / TileSize);
 
@@ -18,7 +18,7 @@ public class HexPositionHelper : MonoBehaviour
         return new HexPosition(gridPositionQ, gridPositionR);
     }
 
-    public static Vector3 WorldPosition(HexPosition gridPosition)
+    public static Vector3 WorldPosition(HexPosition gridPosition) // NEED TO BE ADAPTED !!!
     {
         var scaledWorldPositionX = gridPosition.Q - (HexColumns / 2) + 0.5f;
         var scaledWorldPositionZ = gridPosition.R - (HexRows / 2) + 0.5f;

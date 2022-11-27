@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-    public struct HexPosition
-    {
+    public struct HexPosition // IS THIS RIGHT?
+{
         private readonly int _q;
         private readonly int _r;
 

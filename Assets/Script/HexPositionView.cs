@@ -33,7 +33,7 @@ public class HexPositionView : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _parent.ChilClicked(this);
+        _parent.ChildClicked(this);
     }
 
     internal void Activate() //Creates an event that allow us to change the material through the editor
