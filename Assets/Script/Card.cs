@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Image))]
-public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public bool dragOnSurfaces = true;
     private Camera _camera;
@@ -80,7 +80,7 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (IsOverTile())
         {
-            _cardManager._cardsInTable--;
+            _cardManager._cardsInTable--; //Move to GameLoop --- IDropHandler in positionview --Make the view first
             Destroy(this.gameObject);
 
             Debug.Log("Card dropped");
@@ -112,6 +112,7 @@ public class DragInterface : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, _camera.farClipPlane, _tileLayer))
             return true;
+
         return false;
     }   
 }
