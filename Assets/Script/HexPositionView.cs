@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class ActivationChangeUnityEvent : UnityEvent<bool> { }
 
 
-public class HexPositionView : MonoBehaviour, IPointerClickHandler
+public class HexPositionView : MonoBehaviour, IPointerClickHandler, IDropHandler
 {
     [SerializeField]
     private UnityEvent OnActivate;
@@ -31,7 +31,7 @@ public class HexPositionView : MonoBehaviour, IPointerClickHandler
         _parent = GetComponentInParent<HexBoardView>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) //Event being listened
     {
         _parent.ChildClicked(this);
     }
@@ -45,5 +45,13 @@ public class HexPositionView : MonoBehaviour, IPointerClickHandler
     {
         OnDeactivate?.Invoke();
         OnActivationChanged?.Invoke(false);
+    }
+
+    public void OnDrop(PointerEventData eventData) //IMPLEMENT
+    {
+        if (eventData.pointerDrag != null)
+        {
+            Debug.Log("Dropped object was: " + eventData.pointerDrag);
+        }
     }
 }

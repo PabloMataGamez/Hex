@@ -45,8 +45,8 @@ using UnityEngine;
         {
             var positionViews = GetComponentsInChildren<HexPositionView>();
             foreach (var positionView in positionViews)
-            {
-                _positionViews.Add(positionView.GridPosition, positionView); //Add all the tiles to the list
+            {//Exception, I have to fix the HexPositionView
+                _positionViews.Add(positionView.GridPosition, positionView); //Add all the tiles to the list 
             }
         }
 
@@ -55,10 +55,11 @@ using UnityEngine;
             OnPositionClicked(new PositionEventArgs(positionView.GridPosition));
         }
 
-        protected virtual void OnPositionClicked(PositionEventArgs e) // WHAT DOES THIS DO EXACTLY? IN GAME
-    {
+         //WHAT DOES THIS DO EXACTLY? IN GAME
+        protected virtual void OnPositionClicked(PositionEventArgs e) // Rising the event, telling to all listener 
+        {
             var handler = PositionClicked;
-            handler.Invoke(this, e);
+            handler.Invoke(this, e); //Null
         }
     }
 

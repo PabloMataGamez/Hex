@@ -19,7 +19,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField]
     private CardManager _cardManager;
 
-
     private void Awake()
     {
         _camera = Camera.main;
@@ -78,7 +77,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
 
-        if (IsOverTile())
+        if (IsOverTile()) //NOT SURE HOW TO MOVE IT, AN EVENT, CALLING FROM CARD CLASS, PUBLIC METHOD?
         {
             _cardManager._cardsInTable--; //Move to GameLoop --- IDropHandler in positionview --Make the view first
             Destroy(this.gameObject);
@@ -107,7 +106,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         return comp;
     }
 
-    private bool IsOverTile()
+    public bool IsOverTile()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, _camera.farClipPlane, _tileLayer))

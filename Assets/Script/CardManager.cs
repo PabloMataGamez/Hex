@@ -73,8 +73,6 @@ public class CardManager : MonoBehaviour
                     Quaternion.identity, _canvasParent.transform);
                 //_cardList.Add(newCard);
             }
-
-
             _totalCards++;
             _cardsInTable++;
         }
