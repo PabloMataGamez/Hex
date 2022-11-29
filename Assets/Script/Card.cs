@@ -40,6 +40,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
        // m_DraggingIcon.transform.SetAsLastSibling();
 
         var image = m_DraggingIcon.AddComponent<Image>();
+        image.raycastTarget = false;
 
         image.sprite = GetComponent<Image>().sprite;
 
@@ -82,7 +83,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             _cardManager._cardsInTable--; //Move to GameLoop --- IDropHandler in positionview --Make the view first
             Destroy(this.gameObject);
 
-            Debug.Log("Card dropped");
+           // Debug.Log("Card dropped");
 
             _cardManager.AddNewCard(this.transform);
         }

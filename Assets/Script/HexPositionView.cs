@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class ActivationChangeUnityEvent : UnityEvent<bool> { }
 
 
-public class HexPositionView : MonoBehaviour, IPointerClickHandler, IDropHandler
+public class HexPositionView : MonoBehaviour, IDropHandler
 {
     [SerializeField]
     private UnityEvent OnActivate;
@@ -22,18 +22,18 @@ public class HexPositionView : MonoBehaviour, IPointerClickHandler, IDropHandler
 
     private HexBoardView _parent;
 
-    //HEX: Should be HexPosition
-    public HexPosition GridPosition => HexPositionHelper.GridPosition(transform.position);
+    //We transform the world position to grid position
+    public HexPosition GridPosition => HexPositionHelper.GridPosition(transform.position); 
 
+
+    private void Awake()
+    {
+        gameObject.name = GridPosition.ToString();
+    }
     // public event EventHandler Clicked;
     private void Start()
     {
         _parent = GetComponentInParent<HexBoardView>();
-    }
-
-    public void OnPointerClick(PointerEventData eventData) //Event being listened
-    {
-        _parent.ChildClicked(this);
     }
 
     internal void Activate() //Creates an event that allow us to change the material through the editor
@@ -48,10 +48,11 @@ public class HexPositionView : MonoBehaviour, IPointerClickHandler, IDropHandler
     }
 
     public void OnDrop(PointerEventData eventData) //IMPLEMENT
-    {
+    {   
         if (eventData.pointerDrag != null)
         {
-            Debug.Log("Dropped object was: " + eventData.pointerDrag);
+            _parent.OnCardDroppedOnChild(this, eventData.pointerDrag.GetComponent<Card>());
+            
         }
     }
 }
