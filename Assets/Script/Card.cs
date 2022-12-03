@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Image))]
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
 {
     public bool dragOnSurfaces = true;
     private Camera _camera;
@@ -88,7 +88,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             _cardManager.AddNewCard(this.transform);
         }
     }
-
 
     static public T FindInParents<T>(GameObject go) where T : Component
     {

@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-
 [SerializeField]
 public class ActivationChangeUnityEvent : UnityEvent<bool> { }
-
 
 public class HexPositionView : MonoBehaviour, IDropHandler
 {
@@ -24,7 +22,6 @@ public class HexPositionView : MonoBehaviour, IDropHandler
 
     //We transform the world position to grid position
     public HexPosition GridPosition => HexPositionHelper.GridPosition(transform.position); 
-
 
     private void Awake()
     {
@@ -47,12 +44,11 @@ public class HexPositionView : MonoBehaviour, IDropHandler
         OnActivationChanged?.Invoke(false);
     }
 
-    public void OnDrop(PointerEventData eventData) //IMPLEMENT
+    public void OnDrop(PointerEventData eventData) 
     {   
         if (eventData.pointerDrag != null)
         {
-            _parent.OnCardDroppedOnChild(this, eventData.pointerDrag.GetComponent<Card>());
-            
+            _parent.OnCardDroppedOnChild(this, eventData.pointerDrag.GetComponent<Card>());            
         }
     }
 }

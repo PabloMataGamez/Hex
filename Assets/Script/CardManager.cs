@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour
+public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
 {
     public int _cardsInTable = 0;
     private int _totalCards;
@@ -35,7 +35,6 @@ public class CardManager : MonoBehaviour
            // AddNewCard();
         }
     }
-
 
     void Update()
     {

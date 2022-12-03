@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-    public struct HexPosition // IS THIS RIGHT?
+    public struct HexPosition 
 {
         private readonly int _q;
         private readonly int _r;

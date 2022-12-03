@@ -47,7 +47,7 @@ class HexBoardView : MonoBehaviour
     {
         var positionViews = GetComponentsInChildren<HexPositionView>();
         foreach (var positionView in positionViews)
-        {//Exception, I have to fix the HexPositionView
+        {
             _positionViews.Add(positionView.GridPosition, positionView); //Add all the tiles to the list 
         }
     }
@@ -56,8 +56,7 @@ class HexBoardView : MonoBehaviour
     {
         OnCardDropped(new PositionEventArgs(positionView.GridPosition, card)); //Grid position on the tile clicked
     }
-
-    //WHAT DOES THIS DO EXACTLY? IN GAME
+       
     protected virtual void OnCardDropped(PositionEventArgs e) // Rising the event, telling to all listener 
     {
         var handler = CardDropped;
