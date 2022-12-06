@@ -24,7 +24,7 @@ public class HexPieceView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    internal void Placed(Vector3 worldPosition)
+    internal void Placed(Vector3 worldPosition) // ?????
     {
         transform.position = worldPosition;
         gameObject.SetActive(true);

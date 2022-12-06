@@ -5,45 +5,47 @@ using UnityEngine;
 
 public class PieceMovedEventArgs : EventArgs
 {
-  //  public HexPieceView Piece { get; } //DO I HAVE TO PASS IT AS THE TPIECE?
+      public HexPieceView HexPiece { get; } // I DO HAVE TO PASS IT AS THE TPIECE
 
     public HexPosition FromPostion { get; }
 
     public HexPosition ToPosition { get; }
 
-    public PieceMovedEventArgs(HexPosition fromPostion, HexPosition toPosition)
+    public PieceMovedEventArgs(HexPieceView hexPieceView, HexPosition fromPostion, HexPosition toPosition)
     {
-       // Piece = hexPieceView;
+        HexPiece = hexPieceView;
         FromPostion = fromPostion;
         ToPosition = toPosition;
     }
 }
 
 public class PieceTakenEventArgs : EventArgs
-{  
+{
+    public HexPieceView HexPiece { get; }
     public HexPosition FromPostion { get; }
 
-    public PieceTakenEventArgs(HexPosition fromPostion)
-    {      
+    public PieceTakenEventArgs(HexPieceView hexPieceView, HexPosition fromPostion)
+    {
+        HexPiece = hexPieceView;
         FromPostion = fromPostion;
     }
 }
 
 public class CardDroppedEventArgs : EventArgs
-{   
+{
+    public HexPieceView HexPiece { get; }
 
     public HexPosition ToPosition { get; }
 
-    public CardDroppedEventArgs(HexPosition toPosition)
-    { 
+    public CardDroppedEventArgs(HexPieceView hexPieceView, HexPosition toPosition)
+    {
+        HexPiece = hexPieceView;
         ToPosition = toPosition;
     }
 }
 
 public class HexBoard
 {
-    //  PieceView[,] position = new PieceView[PositionHelper.Columns, PositionHelper.Rows];
-
     public event EventHandler<PieceMovedEventArgs> PieceMoved;
     public event EventHandler<PieceTakenEventArgs> PieceTaken;
     public event EventHandler<CardDroppedEventArgs> PiecePlaced;
@@ -56,18 +58,18 @@ public class HexBoard
         
     }
 
-    public bool TryGetPieceAt(HexPosition position, out HexPieceView piece)
+    public bool TryGetPieceAt(HexPosition position, out HexPieceView piece) //With the position we return a piece
     {
         return _pieces.TryGetValue(position, out piece);
     }
 
-    public bool IsValid(HexPosition position) //To Hex Range
+    public bool IsValid(HexPosition position) //Hex Range = 3
     {
         return (-_range <= position.Q && position.Q <= _range) 
             && (-_range <= position.R && position.R <= _range); //Enough for now, pay attention         
     }
 
-    public bool Place(HexPosition position, HexPieceView piece)
+    public bool Place(HexPosition position, HexPieceView piece) // MOVE AND PLACE? Move to play Place to set?
     {
         if (piece == null)
             return false;
@@ -83,12 +85,12 @@ public class HexBoard
 
         _pieces[position] = piece;
 
-        OnPiecePlaced(new CardDroppedEventArgs(position));
+        OnPiecePlaced(new CardDroppedEventArgs(piece, position)); //WHAT DO WE DO HERE?
 
         return true;
     }
 
-    public bool Move(HexPosition fromPosition, HexPosition toPosition)
+    public bool Move(HexPieceView hexPieceView, HexPosition fromPosition, HexPosition toPosition)
     {
         if (!IsValid(toPosition))
             return false;
@@ -99,15 +101,15 @@ public class HexBoard
         if (!_pieces.TryGetValue(fromPosition, out var piece))
             return false;
 
-        _pieces.Remove(fromPosition);
+        _pieces.Remove(fromPosition); //wE REMOVE AND PLACE A NEW PIECE?
         _pieces[toPosition] = piece;
 
-        OnPieceMoved(new PieceMovedEventArgs(fromPosition, toPosition));
+        OnPieceMoved(new PieceMovedEventArgs(hexPieceView, fromPosition, toPosition));
 
         return true;
     }
 
-    public bool Take(HexPosition fromPosition)
+    public bool Take(HexPieceView hexPieceView, HexPosition fromPosition)
     {
         if (!IsValid(fromPosition))
             return false;
@@ -117,7 +119,7 @@ public class HexBoard
             return false;
 
         _pieces.Remove(fromPosition);
-        OnPieceTaken(new PieceTakenEventArgs(fromPosition));
+        OnPieceTaken(new PieceTakenEventArgs(hexPieceView, fromPosition));
 
         return true;
     }

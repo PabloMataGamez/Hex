@@ -5,18 +5,21 @@ using UnityEngine.EventSystems;
 
 public class GameLoopHex : MonoBehaviour
 {
+    [SerializeField]
+    private HexEngine _engine;
+    [SerializeField]
+    private HexBoard _hexBoard;
 
-    //HexBoard<> _hexBoard;
+    
     void Start()
     {
-        //_hexBoard = new HexBoard<TPiece>();
-
         var hexBoardView = FindObjectOfType<HexBoardView>();
         hexBoardView.CardDropped += OnCardDropped;
 
-        //var pieceViews = GameObject.FindObjectsOfType<PieceView>();
-        //foreach (var pieceView in pieceViews)
-        //    _HEXboard.Place(PositionHelper.GridPosition(pieceView.WorldPosition), pieceView); WORK HERE REGISTER IN HEXBOARD
+        var pieceViews = GameObject.FindObjectsOfType<HexPieceView>();
+        foreach (var pieceView in pieceViews)
+            if(pieceView.Player == Player ) _engine.PlayerPosition = HexPositionHelper.GridPosition(pieceView.transform.position);
+            _hexBoard.Place(HexPositionHelper.GridPosition(pieceView.WorldPosition), pieceView);// WORK HERE REGISTER IN HEXBOARD
     }
 
     private void OnCardDropped(object sender, PositionEventArgs e)
@@ -24,7 +27,6 @@ public class GameLoopHex : MonoBehaviour
         Debug.Log(e.HexPosition);
         Debug.Log(e.Card.Type);
         
-        //_engine.Drop(PlayerPosition, e.Card.Type, e.HexPosition); WORK HERE
-        
+        _engine.Drop(e.Card.Type, e.HexPosition);        
     }
 }
