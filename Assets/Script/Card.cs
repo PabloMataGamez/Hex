@@ -7,6 +7,13 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Image))]
 public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
 {
+
+    //Needs CardType
+    [SerializeField]
+    private CardType _type;
+
+    public CardType Type => _type;
+
     public bool dragOnSurfaces = true;
     private Camera _camera;
 

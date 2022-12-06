@@ -3,91 +3,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PieceMovedEventArgs<TPiece> : EventArgs
+public class PieceMovedEventArgs : EventArgs
 {
-    public TPiece Piece { get; }
+  //  public HexPieceView Piece { get; } //DO I HAVE TO PASS IT AS THE TPIECE?
 
     public HexPosition FromPostion { get; }
 
     public HexPosition ToPosition { get; }
 
-    public PieceMovedEventArgs(TPiece piece, HexPosition fromPostion, HexPosition toPosition)
+    public PieceMovedEventArgs(HexPosition fromPostion, HexPosition toPosition)
     {
-        Piece = piece;
+       // Piece = hexPieceView;
         FromPostion = fromPostion;
         ToPosition = toPosition;
     }
 }
 
-public class PieceTakenEventArgs<TPiece> : EventArgs
-{
-    public TPiece Piece { get; }
-
+public class PieceTakenEventArgs : EventArgs
+{  
     public HexPosition FromPostion { get; }
 
-    public PieceTakenEventArgs(TPiece pieceView, HexPosition fromPostion)
-    {
-        Piece = pieceView;
+    public PieceTakenEventArgs(HexPosition fromPostion)
+    {      
         FromPostion = fromPostion;
     }
 }
 
-public class CardDroppedEventArgs<TPiece> : EventArgs
-{
-    public TPiece Piece { get; }
+public class CardDroppedEventArgs : EventArgs
+{   
 
     public HexPosition ToPosition { get; }
 
-    public CardDroppedEventArgs(TPiece pieceView, HexPosition toPosition)
-    {
-        Piece = pieceView;
+    public CardDroppedEventArgs(HexPosition toPosition)
+    { 
         ToPosition = toPosition;
     }
 }
 
-public class HexBoard<TPiece>
+public class HexBoard
 {
     //  PieceView[,] position = new PieceView[PositionHelper.Columns, PositionHelper.Rows];
 
-    public event EventHandler<PieceMovedEventArgs<TPiece>> PieceMoved;
-    public event EventHandler<PieceTakenEventArgs<TPiece>> PieceTaken;
-    public event EventHandler<CardDroppedEventArgs<TPiece>> PiecePlaced;
+    public event EventHandler<PieceMovedEventArgs> PieceMoved;
+    public event EventHandler<PieceTakenEventArgs> PieceTaken;
+    public event EventHandler<CardDroppedEventArgs> PiecePlaced;
 
-    private Dictionary<HexPosition, TPiece> _pieces = new Dictionary<HexPosition, TPiece>();
+    private Dictionary<HexPosition, HexPieceView> _pieces = new Dictionary<HexPosition, HexPieceView>();
     private int _range = 3;
-    private int _q; //STILL NEEDED? AKA ROWS
-    private int _r; //STILL NEEDED? AKA COLUMNS
-
-    public HexBoard(int q, int r)
+   
+    public HexBoard( )
     {
-        _q = q;
-        _r = r;
+        
     }
 
-    public bool TryGetPieceAt(HexPosition position, out TPiece piece)
+    public bool TryGetPieceAt(HexPosition position, out HexPieceView piece)
     {
         return _pieces.TryGetValue(position, out piece);
     }
 
     public bool IsValid(HexPosition position) //To Hex Range
     {
-        return (-_range <= position.Q && position.Q < _range) && (-_range <= position.R && position.R < _range); //CORRECT? 
-
-        /*
-         var results = [] 
-        for each -N <= q <= +N: 
-            for each max(-N, -q-N) <= r <= min(+N, -q+N): 
-                results.append(axial_add(center, Hex(q, r)))
-         */
+        return (-_range <= position.Q && position.Q <= _range) 
+            && (-_range <= position.R && position.R <= _range); //Enough for now, pay attention         
     }
 
-    public bool Place(HexPosition position, TPiece piece)
+    public bool Place(HexPosition position, HexPieceView piece)
     {
         if (piece == null)
             return false;
 
         if (!IsValid(position))
             return false;
+
         if (_pieces.ContainsKey(position))
             return false;
 
@@ -96,7 +83,7 @@ public class HexBoard<TPiece>
 
         _pieces[position] = piece;
 
-        OnPiecePlaced(new CardDroppedEventArgs<TPiece>(piece, position));
+        OnPiecePlaced(new CardDroppedEventArgs(position));
 
         return true;
     }
@@ -115,7 +102,7 @@ public class HexBoard<TPiece>
         _pieces.Remove(fromPosition);
         _pieces[toPosition] = piece;
 
-        OnPieceMoved(new PieceMovedEventArgs<TPiece>(piece, fromPosition, toPosition));
+        OnPieceMoved(new PieceMovedEventArgs(fromPosition, toPosition));
 
         return true;
     }
@@ -130,22 +117,22 @@ public class HexBoard<TPiece>
             return false;
 
         _pieces.Remove(fromPosition);
-        OnPieceTaken(new PieceTakenEventArgs<TPiece>(piece, fromPosition));
+        OnPieceTaken(new PieceTakenEventArgs(fromPosition));
 
         return true;
     }
 
-    protected virtual void OnPieceMoved(PieceMovedEventArgs<TPiece> eventArgs)
+    protected virtual void OnPieceMoved(PieceMovedEventArgs eventArgs)
     {
         var handler = PieceMoved;
         handler?.Invoke(this, eventArgs);
     }
-    protected virtual void OnPieceTaken(PieceTakenEventArgs<TPiece> eventArgs)
+    protected virtual void OnPieceTaken(PieceTakenEventArgs eventArgs)
     {
         var handler = PieceTaken;
         handler?.Invoke(this, eventArgs);
     }
-    protected virtual void OnPiecePlaced(CardDroppedEventArgs<TPiece> eventArgs)
+    protected virtual void OnPiecePlaced(CardDroppedEventArgs eventArgs)
     {
         var handler = PiecePlaced;
         handler?.Invoke(this, eventArgs);
