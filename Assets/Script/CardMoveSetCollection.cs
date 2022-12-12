@@ -10,38 +10,35 @@ public class CardMoveSetCollection
         = new Dictionary<CardType, CardMoveSet>();
 
     public CardMoveSetCollection(HexBoard board)
-    {
-      /*  _moveSets.Add(CardType.Teleport,
-            new ConfigurableMoveSet(
-                board,
-                (b, p) => new MoveSetHelper<TPiece>(p, b)                
-                .ValidPositions()
+    {/*
+        _moveSets.Add(CardType.Teleport,
+            new CardTeleport(
+                board                                
+                .IsValid()
                 ));
 
         _moveSets.Add(CardType.Slash, 
-            new ConfigurableMoveSet(
-                board,
-                (b, p) => new MoveSetHelper<TPiece>(p, b)                
+            new CardSlash(
+                board               
                 .ValidPositions()
                 ));
 
         _moveSets.Add(CardType.Rotate,
-          new ConfigurableMoveSet(
-              board,
-              (b, p) => new MoveSetHelper<TPiece>(p, b)              
+          new CardRotate(
+              board             
               .ValidPositions()
               ));
 
 
         _moveSets.Add(CardType.Line,
-            new ConfigurableMoveSet(
-                board,
-                (b, p) => new MoveSetHelper<TPiece>(p, b)                
+            new CardLine(
+                board              
                 .ValidPositions()
-                ));        */
+                ));       
+        */
     }
 
-    public ICardMoveSet For(CardType type) //For?
+    public ICardMoveSet For(CardType type) //What is For?
     => _moveSets[type];
 
 

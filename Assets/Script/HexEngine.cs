@@ -48,7 +48,6 @@ public class HexEngine
             return false;
 
         return true;
-
     }    
 }
 

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 [SerializeField]
 public class ActivationChangeUnityEvent : UnityEvent<bool> { }
 
-public class HexPositionView : MonoBehaviour, IDropHandler
+public class HexPositionView : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private UnityEvent OnActivate;
@@ -48,7 +48,25 @@ public class HexPositionView : MonoBehaviour, IDropHandler
     {   
         if (eventData.pointerDrag != null)
         {
-            _parent.OnCardDroppedOnChild(this, eventData.pointerDrag.GetComponent<Card>());            
+            _parent.OnCardDroppedOnChild(this, eventData.pointerDrag.GetComponent<Card>());    
+            //EXECUTE() ?
+            Deactivate(); //NOT WORKING WHEN DROPPED
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) //Hovering 
+    {
+        if (eventData.pointerDrag != null)
+        {
+            Activate();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.pointerDrag != null)
+        {
+            Deactivate();
         }
     }
 }

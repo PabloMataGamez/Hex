@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PieceMovedEventArgs : EventArgs
 {
-      public HexPieceView HexPiece { get; } // I DO HAVE TO PASS IT AS THE TPIECE
-
+    public HexPieceView HexPiece { get; } 
+    
     public HexPosition FromPostion { get; }
 
     public HexPosition ToPosition { get; }
@@ -90,7 +90,7 @@ public class HexBoard
         return true;
     }
 
-    public bool Move(HexPieceView hexPieceView, HexPosition fromPosition, HexPosition toPosition)
+    public bool Move( HexPosition fromPosition, HexPosition toPosition)
     {
         if (!IsValid(toPosition))
             return false;
@@ -101,15 +101,15 @@ public class HexBoard
         if (!_pieces.TryGetValue(fromPosition, out var piece))
             return false;
 
-        _pieces.Remove(fromPosition); //wE REMOVE AND PLACE A NEW PIECE?
+        _pieces.Remove(fromPosition); //we remove the old position fro mthe dictionary
         _pieces[toPosition] = piece;
 
-        OnPieceMoved(new PieceMovedEventArgs(hexPieceView, fromPosition, toPosition));
+        OnPieceMoved(new PieceMovedEventArgs(piece, fromPosition, toPosition));
 
         return true;
     }
 
-    public bool Take(HexPieceView hexPieceView, HexPosition fromPosition)
+    public bool Take(HexPosition fromPosition)
     {
         if (!IsValid(fromPosition))
             return false;
@@ -119,7 +119,7 @@ public class HexBoard
             return false;
 
         _pieces.Remove(fromPosition);
-        OnPieceTaken(new PieceTakenEventArgs(hexPieceView, fromPosition));
+        OnPieceTaken(new PieceTakenEventArgs(piece, fromPosition));
 
         return true;
     }
