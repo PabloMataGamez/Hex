@@ -6,10 +6,12 @@ public class CardTeleport : CardMoveSet
 {
     public CardTeleport(HexBoard board) : base(board)
     {
+
     }
 
     public override bool Execute(HexPosition fromPosition, HexPosition toPosition)
     {
+        //Player.position = OnDrop.Position //DO WE NEED FROMPOSITION?
         return base.Execute(fromPosition, toPosition);
     }
 

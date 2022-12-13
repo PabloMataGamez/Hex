@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardSlash : MonoBehaviour
+public class CardSlash //: CardMoveSet
 {
-    // Start is called before the first frame update
-    void Start()
+    /*
+    public override bool Execute(HexPosition fromPosition, HexPosition toPosition)
     {
-        
+        return base.Execute(fromPosition, toPosition);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Check Adjacent in front and destro
+    public override List<HexPosition> Positions(HexPosition fromPosition)
     {
-        
+        throw new System.NotImplementedException();
     }
+    */
 }

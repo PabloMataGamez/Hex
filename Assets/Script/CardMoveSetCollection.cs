@@ -9,7 +9,7 @@ public class CardMoveSetCollection
     private Dictionary<CardType, CardMoveSet> _moveSets 
         = new Dictionary<CardType, CardMoveSet>();
 
-    public CardMoveSetCollection(HexBoard board)
+    public CardMoveSetCollection(HexBoard board) //TO BE IMPLEMENTED
     {/*
         _moveSets.Add(CardType.Teleport,
             new CardTeleport(
@@ -38,7 +38,7 @@ public class CardMoveSetCollection
         */
     }
 
-    public ICardMoveSet For(CardType type) //What is For?
+    public ICardMoveSet For(CardType type) 
     => _moveSets[type];
 
 

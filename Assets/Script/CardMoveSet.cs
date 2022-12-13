@@ -22,7 +22,7 @@ public abstract class CardMoveSet : ICardMoveSet
         return _board.Move(fromPosition, toPosition);
     }
 
-    List<HexPosition> ICardMoveSet.Positions(HexPosition fromPosition) //   ?????
+    List<HexPosition> ICardMoveSet.Positions(HexPosition fromPosition) //   Repeated ?????
     {
         throw new NotImplementedException();
     }

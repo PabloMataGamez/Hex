@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(Image))]
 public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
 {
-
     //Needs CardType
     [SerializeField]
     private CardType _type;
@@ -44,7 +43,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 
         m_DraggingIcon.transform.SetParent(card.transform, false);
-       // m_DraggingIcon.transform.SetAsLastSibling();
+       
 
         var image = m_DraggingIcon.AddComponent<Image>();
         image.raycastTarget = false;
@@ -85,12 +84,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
 
-        if (IsOverTile()) //NOT SURE HOW TO MOVE IT, AN EVENT, CALLING FROM CARD CLASS, PUBLIC METHOD?
+        if (IsOverTile()) 
         {
-            _cardManager._cardsInTable--; //Move to GameLoop --- IDropHandler in positionview --Make the view first
-            Destroy(this.gameObject);
-
-           // Debug.Log("Card dropped");
+            _cardManager._cardsInTable--; 
+            Destroy(this.gameObject);           
 
             _cardManager.AddNewCard(this.transform);
         }
