@@ -20,15 +20,18 @@ public class CardLine : CardMoveSet
         if (!Positions(hoverPosition).Contains(hoverPosition))
             return false;
 
-        HexBoard.Take(hoverPosition);
+        /*Foreach (hoverPosition in hoverPositions)
+        {
+            HexBoard.Take(hoverPosition); //HERE, IN LIST OR CREATE LIST IN LOOP AND PASS IT? I 
+        }*/                               //I HAVE TO CHECK IF THE HEX HAS A PIECE AND IN THAT CASE TAKE()
+
+        HexBoard.Take(hoverPosition); 
 
         return true;
     }
 
     public override List<HexPosition> Positions(HexPosition hoverPosition)
     {
-
-
         //var currentPosition = HexEngine.PlayerPosition;
         var validPositions = new List<HexPosition>();
        
@@ -43,9 +46,7 @@ public class CardLine : CardMoveSet
 
                 subValidPositions.Add(currentPosition);
                 currentPosition = new HexPosition
-                    (currentPosition.Q + qOffset, currentPosition.R + rOffset);
-
-        
+                    (currentPosition.Q + qOffset, currentPosition.R + rOffset);        
             }
 
             if (subValidPositions.Contains(hoverPosition))

@@ -8,12 +8,22 @@ public class CardPush : CardMoveSet
     {
     }
     
-    public override bool Execute(HexPosition hoverPosition, CardView cardView)
+    public override bool Execute(HexPosition hoverPosition, CardView cardView) 
     {
-        throw new System.NotImplementedException();
+        if (!Positions(hoverPosition).Contains(hoverPosition))
+            return false;
+
+        /*Foreach (hoverPosition in hoverPositions)
+        {
+           Vector2 direction = hoverPosition - playerPosition;
+           enemyPosition += direction;
+        }*/
+
+
+        return true;
     }
 
-    public override List<HexPosition> Positions(HexPosition hoverPosition)
+    public override List<HexPosition> Positions(HexPosition hoverPosition) //Same as Slash
     {
         var validPositions = new List<HexPosition>();
 
@@ -23,4 +33,6 @@ public class CardPush : CardMoveSet
         return validPositions;
     }    
 }
+
+
 

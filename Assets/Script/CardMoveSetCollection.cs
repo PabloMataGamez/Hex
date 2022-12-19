@@ -10,7 +10,7 @@ public class CardMoveSetCollection
     private Dictionary<CardType, CardMoveSet> _moveSets 
         = new Dictionary<CardType, CardMoveSet>();
 
-    public CardMoveSetCollection(HexBoard board, HexEngine engine) 
+    public CardMoveSetCollection(HexBoard board, HexEngine engine) //REVISE
     {
         _moveSets.Add(CardType.Teleport,
             new CardTeleport(board, engine));
@@ -30,8 +30,6 @@ public class CardMoveSetCollection
     public ICardMoveSet For(CardType type) 
     => _moveSets[type];
 
-
     internal bool TryGetMoveSet(CardType type, out CardMoveSet moveSet)
         => _moveSets.TryGetValue(type, out moveSet);
-
 }

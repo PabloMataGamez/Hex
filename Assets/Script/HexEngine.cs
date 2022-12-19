@@ -26,7 +26,7 @@ public class HexEngine
         }
     }    
     
-    public bool Drop(CardView cardView, HexPosition hoverPosition) // accept card instead of cardtype
+    public bool Drop(CardView cardView, HexPosition hoverPosition) // accept card instead of cardtype //REVISE
     {    
 
         if (!_hexBoard.IsValid(hoverPosition))
@@ -38,7 +38,7 @@ public class HexEngine
         if (!moveSet.Positions(hoverPosition).Contains(hoverPosition))
             return false;
 
-        if (!moveSet.Execute(hoverPosition, cardView)) // pass card to Moveset
+        if (!moveSet.Execute(hoverPosition, cardView)) // pass card to Moveset FOR WHAT? 
             return false;
 
         return true;
