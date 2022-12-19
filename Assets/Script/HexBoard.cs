@@ -57,8 +57,8 @@ public class HexBoard
     {
         
     }
-
-    public bool TryGetPieceAt(HexPosition position, out HexPieceView piece) //With the position we return a piece
+    //With the position we return a piece and if it is there
+    public bool TryGetPieceAt(HexPosition position, out HexPieceView piece) 
     {
         return _pieces.TryGetValue(position, out piece);
     }
@@ -66,10 +66,10 @@ public class HexBoard
     public bool IsValid(HexPosition position) //Hex Range = 3
     {
         return (-_range <= position.Q && position.Q <= _range) 
-            && (-_range <= position.R && position.R <= _range); //Enough for now, pay attention         
+            && (Math.Max(-_range, - position.Q -_range) <= position.R && position.R <= Math.Min(_range, -position.Q + _range));          
     }
 
-    public bool Place(HexPosition position, HexPieceView piece) // MOVE AND PLACE? Move to play Place to set?
+    public bool Place(HexPosition position, HexPieceView piece) 
     {
         if (piece == null)
             return false;
@@ -85,7 +85,7 @@ public class HexBoard
 
         _pieces[position] = piece;
 
-        OnPiecePlaced(new CardDroppedEventArgs(piece, position)); //WHAT DO WE DO HERE?
+        OnPiecePlaced(new CardDroppedEventArgs(piece, position)); 
 
         return true;
     }
@@ -101,7 +101,7 @@ public class HexBoard
         if (!_pieces.TryGetValue(fromPosition, out var piece))
             return false;
 
-        _pieces.Remove(fromPosition); //we remove the old position fro mthe dictionary
+        _pieces.Remove(fromPosition); //We remove the old position from the dictionary
         _pieces[toPosition] = piece;
 
         OnPieceMoved(new PieceMovedEventArgs(piece, fromPosition, toPosition));

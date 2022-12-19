@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardSlash //: CardMoveSet
+public class CardSlash : CardMoveSet
 {
-    /*
-    public override bool Execute(HexPosition fromPosition, HexPosition toPosition)
+    public CardSlash(HexBoard board, HexEngine engine) : base(board, engine)
     {
-        return base.Execute(fromPosition, toPosition);
     }
 
-    // Check Adjacent in front and destro
-    public override List<HexPosition> Positions(HexPosition fromPosition)
+    public override bool Execute(HexPosition hoverPosition, CardView cardView)
     {
         throw new System.NotImplementedException();
     }
-    */
+
+    public override List<HexPosition> Positions(HexPosition hoverPosition)
+    {
+        var validPositions = new List<HexPosition>();
+
+        if (!HexBoard.TryGetPieceAt(hoverPosition, out var piece))
+            validPositions.Add(hoverPosition);
+
+        return validPositions;
+    }
 }

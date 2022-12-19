@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 public class HexEngine   
 {
     public HexPosition PlayerPosition { get; set; } //FromPosition will always be PlayerPostion
@@ -12,13 +11,11 @@ public class HexEngine
     private HexBoard _hexBoard;
     private CardMoveSetCollection _cardMoveSetCollection;
 
-   // private Player _currentPlayer = Player.Player1;
-    // public Player CurrentPlayer => _currentPlayer;
 
     public HexEngine(HexBoard board)
     {
         _hexBoard = board;
-        _cardMoveSetCollection = new CardMoveSetCollection(_hexBoard); 
+        _cardMoveSetCollection = new CardMoveSetCollection(_hexBoard, this); 
     }
 
     public CardMoveSetCollection MoveSets
@@ -29,22 +26,19 @@ public class HexEngine
         }
     }    
     
-    public bool Drop(CardType cardtype, HexPosition dropPosition)
+    public bool Drop(CardView cardView, HexPosition hoverPosition) // accept card instead of cardtype
     {    
 
-        if (!_hexBoard.IsValid(dropPosition))
+        if (!_hexBoard.IsValid(hoverPosition))
             return false;      
 
-      //  if (piece.Player != CurrentPlayer)
-      //      return false;
-
-        if (!MoveSets.TryGetMoveSet(cardtype, out var moveSet))
+        if (!MoveSets.TryGetMoveSet(cardView.Type, out var moveSet))
             return false;
 
-        if (!moveSet.Positions(PlayerPosition).Contains(dropPosition))
+        if (!moveSet.Positions(hoverPosition).Contains(hoverPosition))
             return false;
 
-        if (!moveSet.Execute(PlayerPosition, dropPosition))
+        if (!moveSet.Execute(hoverPosition, cardView)) // pass card to Moveset
             return false;
 
         return true;

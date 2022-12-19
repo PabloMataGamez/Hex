@@ -24,10 +24,11 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
     [SerializeField]
     private Canvas _canvasParent;
 
-    private List<GameObject> _cardList;
+    private List<GameObject> _cardList; 
 
     private void Awake()
     {
+        _cardList = new List<GameObject>();
         _canvasParent = FindObjectOfType<Canvas>();
 
         for (int i = 0; i < 5; i++)

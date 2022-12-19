@@ -14,6 +14,12 @@ public class HexPieceView : MonoBehaviour
 
     public Vector3 WorldPosition => transform.position;
 
+    private void Start()
+    {
+        var gridPostition = HexPositionHelper.GridPosition(transform.position);
+        transform.position = HexPositionHelper.WorldPosition(gridPostition);
+    }
+
     internal void MoveTo(Vector3 worldPosition)
     {
         transform.position = worldPosition;
@@ -24,7 +30,7 @@ public class HexPieceView : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    internal void Placed(Vector3 worldPosition) // ?????
+    internal void Placed(Vector3 worldPosition) 
     {
         transform.position = worldPosition;
         gameObject.SetActive(true);

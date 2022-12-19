@@ -6,12 +6,12 @@ using UnityEngine;
 public class PositionEventArgs : EventArgs
 {
     public HexPosition HexPosition { get; }
-    public Card Card { get; }
+    public CardView CardView { get; }
 
-    public PositionEventArgs(HexPosition position, Card card)
+    public PositionEventArgs(HexPosition position, CardView card)
     {
         HexPosition = position;
-        Card = card;
+        CardView = card;
     }
 }
 
@@ -20,11 +20,12 @@ class HexBoardView : MonoBehaviour
     private List<HexPosition> _activePosition = new List<HexPosition>();
 
     public event EventHandler<PositionEventArgs> CardDropped; //Event all listener will be evoked
+    public event EventHandler<PositionEventArgs> CardHovered;
 
     //We store HexPositionViews using its HexPosition as key/ID
     private Dictionary<HexPosition, HexPositionView> _positionViews = new Dictionary<HexPosition, HexPositionView>();
 
-    public List<HexPosition> ActivePosition
+    public List<HexPosition> ActivePositions
     {
         set
         {
@@ -52,14 +53,25 @@ class HexBoardView : MonoBehaviour
         }
     }
 
-    internal void OnCardDroppedOnChild(HexPositionView positionView, Card card) // Fires an event and we passed the grid position
+    internal void OnCardDroppedOnChild(HexPositionView positionView, CardView card) // Fires an event and we passed the grid position
     {
         OnCardDropped(new PositionEventArgs(positionView.GridPosition, card)); //Grid position on the tile clicked
     }
-       
+
+    internal void OnCardHoveredOverChild(HexPositionView positionView, CardView card) // Fires an event and we passed the grid position
+    {
+        OnCardHovered(new PositionEventArgs(positionView.GridPosition, card)); //Grid position on the tile clicked
+    }
+
     protected virtual void OnCardDropped(PositionEventArgs e) // Rising the event, telling to all listener 
     {
         var handler = CardDropped;
+        handler?.Invoke(this, e); //Null
+    }
+
+    protected virtual void OnCardHovered(PositionEventArgs e) // Rising the event, telling to all listener 
+    {
+        var handler = CardHovered;
         handler?.Invoke(this, e); //Null
     }
 }

@@ -5,9 +5,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Image))]
-public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
-{
-    //Needs CardType
+public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
+{   
     [SerializeField]
     private CardType _type;
 
@@ -84,7 +83,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
 
-        if (IsOverTile()) 
+        if (IsOverTile()) //MOVE TO CARDACTIONS
         {
             _cardManager._cardsInTable--; 
             Destroy(this.gameObject);           

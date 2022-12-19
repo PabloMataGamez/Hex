@@ -6,36 +6,25 @@ using System.Threading.Tasks;
 
 public class CardMoveSetCollection 
 {
+    private readonly HexEngine _engine;
     private Dictionary<CardType, CardMoveSet> _moveSets 
         = new Dictionary<CardType, CardMoveSet>();
 
-    public CardMoveSetCollection(HexBoard board) //TO BE IMPLEMENTED
-    {/*
+    public CardMoveSetCollection(HexBoard board, HexEngine engine) 
+    {
         _moveSets.Add(CardType.Teleport,
-            new CardTeleport(
-                board                                
-                .IsValid()
-                ));
-
+            new CardTeleport(board, engine));
+        
         _moveSets.Add(CardType.Slash, 
-            new CardSlash(
-                board               
-                .ValidPositions()
-                ));
+            new CardSlash(board, engine));
 
-        _moveSets.Add(CardType.Rotate,
-          new CardRotate(
-              board             
-              .ValidPositions()
-              ));
-
+        _moveSets.Add(CardType.Push,
+          new CardPush(board, engine));
 
         _moveSets.Add(CardType.Line,
-            new CardLine(
-                board              
-                .ValidPositions()
-                ));       
-        */
+                    new CardLine(board, engine));
+
+        this._engine = engine;
     }
 
     public ICardMoveSet For(CardType type) 
