@@ -17,36 +17,38 @@ public class CardLine : CardMoveSet
 
     public override bool Execute(HexPosition hoverPosition, CardView cardView)
     {
-        if (!Positions(hoverPosition).Contains(hoverPosition))
+        var validPositions = Positions(hoverPosition);
+        if (!validPositions.Contains(hoverPosition))
             return false;
 
-        /*Foreach (hoverPosition in hoverPositions)
+        foreach (var validPosition in validPositions)
         {
-            HexBoard.Take(hoverPosition); //HERE, IN LIST OR CREATE LIST IN LOOP AND PASS IT? I 
-        }*/                               //I HAVE TO CHECK IF THE HEX HAS A PIECE AND IN THAT CASE TAKE()
-
-        HexBoard.Take(hoverPosition); 
+            HexBoard.Take(validPosition);
+        }
 
         return true;
     }
 
-    public override List<HexPosition> Positions(HexPosition hoverPosition)
+    public override List<HexPosition> Positions(HexPosition hoverPosition) //CONTAINS PLAYER POSITION TOO
     {
-        //var currentPosition = HexEngine.PlayerPosition;
         var validPositions = new List<HexPosition>();
        
         foreach (Vector2 direction in _directions)
         {
+            int qOffset = (int)direction.x;
+            int rOffset = (int)direction.y;
+
             var subValidPositions = new List<HexPosition>();
+
             var currentPosition = HexEngine.PlayerPosition;
-            while (HexBoard.IsValid(currentPosition)) //new list each loop
+            currentPosition = new HexPosition(currentPosition.Q + qOffset, currentPosition.R + rOffset);
+        
+            while (HexBoard.IsValid(currentPosition)) //New list each loop
             {
-                int qOffset = (int)direction.x;
-                int rOffset = (int)direction.y;
+       
 
                 subValidPositions.Add(currentPosition);
-                currentPosition = new HexPosition
-                    (currentPosition.Q + qOffset, currentPosition.R + rOffset);        
+                currentPosition = new HexPosition(currentPosition.Q + qOffset, currentPosition.R + rOffset);        
             }
 
             if (subValidPositions.Contains(hoverPosition))

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class HexEngine   
 {
-    public HexPosition PlayerPosition { get; set; } //FromPosition will always be PlayerPostion
+    public HexPosition PlayerPosition { get; set; } //FromPosition will always be PlayerPostion //If Player moved do it here too
 
     private HexBoard _hexBoard;
     private CardMoveSetCollection _cardMoveSetCollection;
@@ -28,14 +28,13 @@ public class HexEngine
     
     public bool Drop(CardView cardView, HexPosition hoverPosition) // accept card instead of cardtype //REVISE
     {    
-
-        if (!_hexBoard.IsValid(hoverPosition))
+        if (!_hexBoard.IsValid(hoverPosition)) //Is a valid position
             return false;      
 
-        if (!MoveSets.TryGetMoveSet(cardView.Type, out var moveSet))
+        if (!MoveSets.TryGetMoveSet(cardView.Type, out var moveSet)) //Is a moveset to use
             return false;
 
-        if (!moveSet.Positions(hoverPosition).Contains(hoverPosition))
+        if (!moveSet.Positions(hoverPosition).Contains(hoverPosition)) //Is Valid and Movset coincide
             return false;
 
         if (!moveSet.Execute(hoverPosition, cardView)) // pass card to Moveset FOR WHAT? 

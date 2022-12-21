@@ -53,6 +53,11 @@ public class GameLoopHex : MonoBehaviour
         Debug.Log(e.HexPosition);
         Debug.Log(e.CardView.Type);
 
-        _engine.Drop(e.CardView, e.HexPosition);  //pass the card
+        _engine.Drop(e.CardView, e.HexPosition);
+
+        if (_engine.Drop(e.CardView, e.HexPosition)) {  //pass the card
+            //e.CardView.Played();
+            //_handView.addNewCard();
+        }
     }
 }

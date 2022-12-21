@@ -4,7 +4,7 @@ using UnityEngine;
 
 
     public struct HexPosition 
-{
+    {
         private readonly int _q;
         private readonly int _r;
 
