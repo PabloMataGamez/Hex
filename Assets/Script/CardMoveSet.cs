@@ -8,7 +8,6 @@ public abstract class CardMoveSet : ICardMoveSet
 {
     private HexBoard _board;
     private readonly HexEngine _engine;
-
     protected HexBoard HexBoard => _board;
     protected HexEngine HexEngine => _engine;
 

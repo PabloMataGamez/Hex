@@ -13,7 +13,6 @@ public class GameLoopHex : MonoBehaviour
 
     private HexBoardView _hexBoardView;
 
-
     void Start()
     {
         _hexBoard = new HexBoard();
@@ -31,9 +30,7 @@ public class GameLoopHex : MonoBehaviour
         foreach (var pieceView in pieceViews)  
         {
             if (pieceView.Player == Player.Player)
-
                 _engine.PlayerPosition = HexPositionHelper.GridPosition(pieceView.transform.position);
-
 
             _hexBoard.Place(HexPositionHelper.GridPosition(pieceView.WorldPosition), pieceView);
         }           

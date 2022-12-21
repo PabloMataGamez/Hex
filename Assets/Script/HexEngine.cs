@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 public class HexEngine   
 {
     public HexPosition PlayerPosition { get; set; } //FromPosition will always be PlayerPostion //If Player moved do it here too
-
     private HexBoard _hexBoard;
     private CardMoveSetCollection _cardMoveSetCollection;
-
 
     public HexEngine(HexBoard board)
     {
@@ -26,7 +24,7 @@ public class HexEngine
         }
     }    
     
-    public bool Drop(CardView cardView, HexPosition hoverPosition) // accept card instead of cardtype //REVISE
+    public bool Drop(CardView cardView, HexPosition hoverPosition) // Accept card instead of cardtype 
     {    
         if (!_hexBoard.IsValid(hoverPosition)) //Is a valid position
             return false;      
@@ -37,10 +35,9 @@ public class HexEngine
         if (!moveSet.Positions(hoverPosition).Contains(hoverPosition)) //Is Valid and Movset coincide
             return false;
 
-        if (!moveSet.Execute(hoverPosition, cardView)) // pass card to Moveset FOR WHAT? 
+        if (!moveSet.Execute(hoverPosition, cardView)) 
             return false;
 
         return true;
     }    
 }
-

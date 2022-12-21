@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardTeleport : CardMoveSet
-{
-    // PASS CARDVIEW ?
+{    
     public CardTeleport(HexBoard board, HexEngine engine) : base(board, engine)
     {
     }

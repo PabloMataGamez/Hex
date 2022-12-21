@@ -75,4 +75,3 @@ class HexBoardView : MonoBehaviour
         handler?.Invoke(this, e); //Null
     }
 }
-

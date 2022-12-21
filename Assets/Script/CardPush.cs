@@ -11,6 +11,7 @@ public class CardPush : CardMoveSet
         new Vector2Int(+1, 0), new Vector2Int(+1, -1), new Vector2Int(0, -1),
         new Vector2Int(-1, 0),new Vector2Int(-1, +1), new Vector2Int(0, +1)
     };
+
     public CardPush(HexBoard board, HexEngine engine) : base(board, engine)
     {
     }
@@ -21,7 +22,7 @@ public class CardPush : CardMoveSet
         if (!validPositions.Contains(hoverPosition))
             return false;
 
-        foreach (var validPosition in validPositions) //THIS
+        foreach (var validPosition in validPositions) 
         {
             Vector2Int direction = Vector2Int.zero ;  
              direction.x = hoverPosition.Q - HexEngine.PlayerPosition.Q;
@@ -30,7 +31,7 @@ public class CardPush : CardMoveSet
            HexPosition newPosition = new HexPosition
                 (validPosition.Q + direction.x, validPosition.R + direction.y); //New position
 
-            if (!HexBoard.IsValid(newPosition)) //Isnt a valid position
+            if (!HexBoard.IsValid(newPosition)) //Isn't a valid position
                 HexBoard.Take(validPosition);
 
               if(!HexBoard.TryGetPieceAt(newPosition, out var piece))
@@ -44,13 +45,11 @@ public class CardPush : CardMoveSet
     {
         var validPositions = new List<HexPosition>();
 
-        Vector2Int initialDirection = _directions[4]; // +1 -1
+        Vector2Int initialDirection = _directions[4]; // -1, 0
 
         var currentPosition = new HexPosition //Offset in corner 4 added
             (HexEngine.PlayerPosition.Q + initialDirection.x,
-            HexEngine.PlayerPosition.R + initialDirection.y);
-
-        // var hex = cube_add(center, cube_scale(cube_direction(4), radius)) //WHAT IS THIS PART?
+            HexEngine.PlayerPosition.R + initialDirection.y);  
 
         for (int i = 0; i < 6; i++)
         {
@@ -84,6 +83,3 @@ public class CardPush : CardMoveSet
           + Mathf.Abs(hoverPosition.R - validPosition.R)) / 2;
     }
 }
-
-
-

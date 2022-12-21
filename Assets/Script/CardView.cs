@@ -9,7 +9,6 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 {   
     [SerializeField]
     private CardType _type;
-
     public CardType Type => _type;
 
     public bool dragOnSurfaces = true;
@@ -28,7 +27,6 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         _camera = Camera.main;
         _cardManager = FindObjectOfType<CardManager>();
-
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -40,9 +38,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         // What we want to do is create an icon for this.
         m_DraggingIcon = new GameObject("icon");
 
-
-        m_DraggingIcon.transform.SetParent(card.transform, false);
-       
+        m_DraggingIcon.transform.SetParent(card.transform, false);       
 
         var image = m_DraggingIcon.AddComponent<Image>();
         image.raycastTarget = false;

@@ -7,10 +7,8 @@ using UnityEngine;
     {
         private readonly int _q;
         private readonly int _r;
-
         public int Q => _q;
         public int R => _r;
-
 
         public HexPosition(int q, int r)
         {
@@ -24,4 +22,3 @@ using UnityEngine;
             return $"Position(Q: {_q}, R: {_r})";
         }
     }
-
