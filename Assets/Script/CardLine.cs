@@ -44,9 +44,7 @@ public class CardLine : CardMoveSet
             currentPosition = new HexPosition(currentPosition.Q + qOffset, currentPosition.R + rOffset);
         
             while (HexBoard.IsValid(currentPosition)) //New list each loop
-            {
-       
-
+            {  
                 subValidPositions.Add(currentPosition);
                 currentPosition = new HexPosition(currentPosition.Q + qOffset, currentPosition.R + rOffset);        
             }

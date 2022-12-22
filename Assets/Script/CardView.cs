@@ -28,6 +28,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         _camera = Camera.main;
         _cardManager = FindObjectOfType<CardManager>();
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         var card = FindInParents<Image>(gameObject);
@@ -78,14 +79,23 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
-
-        if (IsOverTile()) //MOVE TO CARDACTIONS
+/*
+        if (IsOverTile()) 
         {
             _cardManager._cardsInTable--; 
             Destroy(this.gameObject);           
 
             _cardManager.AddNewCard(this.transform);
         }
+*/
+    }
+
+    public void CardExecuted()
+    {
+        _cardManager._cardsInTable--;
+        Destroy(this.gameObject);
+
+        _cardManager.AddNewCard(this.transform);
     }
 
     static public T FindInParents<T>(GameObject go) where T : Component

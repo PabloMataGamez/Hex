@@ -25,8 +25,8 @@ public class CardPush : CardMoveSet
         foreach (var validPosition in validPositions) 
         {
             Vector2Int direction = Vector2Int.zero ;  
-             direction.x = hoverPosition.Q - HexEngine.PlayerPosition.Q;
-             direction.y = hoverPosition.R - HexEngine.PlayerPosition.R; //Direction
+             direction.x = validPosition.Q - HexEngine.PlayerPosition.Q;
+             direction.y = validPosition.R - HexEngine.PlayerPosition.R; //Direction
 
            HexPosition newPosition = new HexPosition
                 (validPosition.Q + direction.x, validPosition.R + direction.y); //New position
@@ -56,7 +56,9 @@ public class CardPush : CardMoveSet
             Vector2Int direction = _directions[i];
             for (int j = 0; j < _radius; j++)
             {
-                validPositions.Add(currentPosition);
+                if (HexBoard.IsValid(currentPosition)) //If is not valid it doesnt show or throw an error
+                    validPositions.Add(currentPosition);
+
                 currentPosition = new HexPosition(currentPosition.Q + direction.x, currentPosition.R + direction.y);
             }
         }
@@ -75,7 +77,7 @@ public class CardPush : CardMoveSet
         return validPositions;
     }
 
-    private int CheckRange(HexPosition hoverPosition, HexPosition validPosition) //CORRECT? 
+    private int CheckRange(HexPosition hoverPosition, HexPosition validPosition)  
     {
 
         return (Mathf.Abs(hoverPosition.Q - validPosition.Q)

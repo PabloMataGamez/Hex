@@ -45,7 +45,9 @@ public class CardSlash : CardMoveSet
                 Vector2Int direction = _directions[i];
                 for (int j = 0;  j < _radius; j++)
                 {
-                   validPositions.Add(currentPosition);
+                    if (HexBoard.IsValid(currentPosition)) //If is not valid it doesnt show or throw an error
+                       validPositions.Add(currentPosition);
+
                    currentPosition = new HexPosition(currentPosition.Q + direction.x, currentPosition.R + direction.y);
                 }
             }
