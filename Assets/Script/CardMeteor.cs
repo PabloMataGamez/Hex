@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-class CardExtra : CardMoveSet
+class CardMeteor : CardMoveSet
 {
     private int _radius = 1;
 
@@ -11,7 +11,7 @@ class CardExtra : CardMoveSet
         new Vector2Int(-1, 0),new Vector2Int(-1, +1), new Vector2Int(0, +1)
     };
 
-    public CardExtra(HexBoard board, HexEngine engine) : base(board, engine)
+    public CardMeteor(HexBoard board, HexEngine engine) : base(board, engine)
     {
     }
 

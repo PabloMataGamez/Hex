@@ -21,9 +21,8 @@ public class CardMoveSetCollection
         _moveSets.Add(CardType.Line,
                     new CardLine(board, engine));
 
-
-        _moveSets.Add(CardType.Extra,
-                   new CardExtra(board, engine));
+        _moveSets.Add(CardType.Meteor,
+                   new CardMeteor(board, engine));
 
         this._engine = engine;
     }
