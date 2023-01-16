@@ -26,11 +26,8 @@ public class CardManager : MonoBehaviour
     [SerializeField]
     private Canvas _canvasParent;
 
-    private List<GameObject> _cardList; 
-
     private void Awake()
     {
-        _cardList = new List<GameObject>();
         _canvasParent = FindObjectOfType<Canvas>();      
     }  
 

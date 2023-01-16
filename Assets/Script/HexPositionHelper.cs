@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HexPositionHelper : MonoBehaviour  //We calculate the position from Hex to Pixel and reverse

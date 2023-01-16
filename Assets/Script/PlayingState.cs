@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 class PlayingState : State
 {
@@ -50,17 +45,6 @@ class PlayingState : State
         }
     }
 
-    private void InitializeScene(AsyncOperation obj)
-    {
-        _hexBoardView = GameObject.FindObjectOfType<HexBoardView>();
-        if (_hexBoardView != null)
-            _hexBoardView.CardDropped += OnCardDropped;     
-
-        var pieceViews = GameObject.FindObjectsOfType<HexPieceView>();
-        foreach (var pieceView in pieceViews)
-            _hexBoard.Place(HexPositionHelper.GridPosition(pieceView.WorldPosition), pieceView);
-    }
-
     public override void OnExit()
     {
         base.OnExit();
@@ -70,7 +54,6 @@ class PlayingState : State
             _hexBoardView.CardHovered -= OnCardHovered;
         }
 
-        //  SceneManager.UnloadSceneAsync("Game");
         _playing.gameObject.SetActive(false);
         Debug.Log("Game");
     }
@@ -79,32 +62,13 @@ class PlayingState : State
     {
         if (_hexBoardView != null)
             _hexBoardView.CardDropped -= OnCardDropped;
-
-        /*
-        if (_replayView != null)
-            _replayView.PreviousClicked -= OnPreviousClicked;
-        */
     }
 
     public override void OnResume()
     {
         if (_hexBoardView != null)
             _hexBoardView.CardDropped += OnCardDropped;
-        /*
-        if (_replayView != null)
-        {
-            _replayView.PreviousClicked -= OnPreviousClicked;
-            _replayView.PreviousClicked += OnPreviousClicked;
-        }
-        */
     }
-
-    /*
-    private void OnPreviousClicked(object sender, EventArgs e)
-    {
-       // StateMachine.Push(States.Replaying);
-    }
-    */
 
     private void OnCardDropped(object sender, PositionEventArgs e)
     {

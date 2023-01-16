@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
     public struct HexPosition 
     {
         private readonly int _q;

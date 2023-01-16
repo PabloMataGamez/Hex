@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Image))]
 public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler //Card UI behaviour
@@ -79,15 +78,6 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         if (m_DraggingIcon != null)
             Destroy(m_DraggingIcon);
-/*
-        if (IsOverTile()) 
-        {
-            _cardManager._cardsInTable--; 
-            Destroy(this.gameObject);           
-
-            _cardManager.AddNewCard(this.transform);
-        }
-*/
     }
 
     public void CardExecuted()

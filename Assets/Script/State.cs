@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-class State 
+﻿class State 
 {
     public StateMachine StateMachine { get; set; }
     public virtual void OnExit() { }

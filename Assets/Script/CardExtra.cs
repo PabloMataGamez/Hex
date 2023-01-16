@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 class CardExtra : CardMoveSet
@@ -15,10 +11,8 @@ class CardExtra : CardMoveSet
         new Vector2Int(-1, 0),new Vector2Int(-1, +1), new Vector2Int(0, +1)
     };
 
-
     public CardExtra(HexBoard board, HexEngine engine) : base(board, engine)
     {
-
     }
 
     public override bool Execute(HexPosition hoverPosition, CardView cardView)
@@ -29,7 +23,8 @@ class CardExtra : CardMoveSet
 
         foreach (var validPosition in validPositions)
         {
-            HexBoard.Take(validPosition);
+            if(CheckIfPlayer(validPosition))
+                HexBoard.Take(validPosition);
         }
 
         return true;
@@ -58,27 +53,15 @@ class CardExtra : CardMoveSet
         }
         validPositions.Add(hoverPosition);
 
-        /* if (validPositions.Contains(hoverPosition)) //REVISE
-         {
-
-             List<HexPosition> filteredValidPositions = new List<HexPosition>();
-             foreach(var validPosition in validPositions)
-             { 
-                 if (validPosition.Equals(hoverPosition) || CheckRange(hoverPosition, validPosition) == 1) 
-                     filteredValidPositions.Add(validPosition);
-             }
-             return filteredValidPositions;
-         }*/
-
         return validPositions;
     }
 
-    private int CheckRange(HexPosition hoverPosition, HexPosition validPosition)
+    private bool CheckIfPlayer(HexPosition validPosition)
     {
+        if (validPosition.Q == HexEngine.PlayerPosition.Q && validPosition.R == HexEngine.PlayerPosition.R)
+            return false;
 
-        return (Mathf.Abs(hoverPosition.Q - validPosition.Q)
-          + Mathf.Abs(hoverPosition.Q + hoverPosition.R - validPosition.Q - validPosition.R)
-          + Mathf.Abs(hoverPosition.R - validPosition.R)) / 2;
+        else return true;
+       
     }
 }
-

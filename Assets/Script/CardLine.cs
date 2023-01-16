@@ -12,7 +12,6 @@ public class CardLine : CardMoveSet
 
     public CardLine(HexBoard board, HexEngine engine) : base(board, engine)
     { 
-
     }
 
     public override bool Execute(HexPosition hoverPosition, CardView cardView)

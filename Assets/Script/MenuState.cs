@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 class MenuState : State
 {
     private MenuViews _menuView;
-   // private GameObject _menu;
 
     public override void OnEnter()
     {
@@ -38,7 +32,6 @@ class MenuState : State
         {
             _menuView.PlayClicked -= OnPlayClicked;
             _menuView.gameObject.SetActive(false);
-        }       
-        //  SceneManager.UnloadSceneAsync("Menu");
+        }    
     }
 }
