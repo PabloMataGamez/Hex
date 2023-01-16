@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7209d4236de33024aa8c4664171bc40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 4
   dragOnSurfaces: 1
   _tileLayer:
     serializedVersion: 2
@@ -1105,7 +1105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 630483d50717b2546b5ca5b2afe6eeb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e848a0513c5a08478b6d77c2d070c18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1231,6 +1231,7 @@ MonoBehaviour:
   _card2: {fileID: 2520824637731983269, guid: 44cca093ac2843a459a573a6d2bd3794, type: 3}
   _card3: {fileID: 2520824637731983269, guid: 739324ade5e8f6946b151ab41423df40, type: 3}
   _card4: {fileID: 2520824637731983269, guid: 3b33f60ea4438cf4fb1f0182206c4eca, type: 3}
+  _card5: {fileID: 2520824637731983269, guid: fac3a56af0ab085499a20e779c3cfb00, type: 3}
   _canvasParent: {fileID: 1428580200}
 --- !u!1 &1751576297
 GameObject:

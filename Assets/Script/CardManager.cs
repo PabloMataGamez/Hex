@@ -20,6 +20,8 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
     private GameObject _card3;
     [SerializeField]
     private GameObject _card4;
+    [SerializeField]
+    private GameObject _card5;
 
     [SerializeField]
     private Canvas _canvasParent;
@@ -47,7 +49,7 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
 
         if (_totalCards < _maxTotalCards && _cardsInTable < _maxCardsInTable)
         {
-            int random = Random.Range(1, 4);
+            int random = Random.Range(1, 5);
 
             if (random == 1)
             {
@@ -70,6 +72,12 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
             else if (random == 4)
             {
                 GameObject newCard = Instantiate(_card4, new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                    Quaternion.identity, _canvasParent.transform);
+                //_cardList.Add(newCard);
+            }
+            else if (random == 5)
+            {
+                GameObject newCard = Instantiate(_card5, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
                 //_cardList.Add(newCard);
             }

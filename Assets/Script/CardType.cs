@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
     public enum CardType
     {
-    Teleport, Slash, Push, Line
+    Teleport, Slash, Push, Line, Extra
     }
