@@ -15,7 +15,7 @@ public class PositionEventArgs : EventArgs
     }
 }
 
-class HexBoardView : MonoBehaviour
+public class HexBoardView : MonoBehaviour
 {
     private List<HexPosition> _activePosition = new List<HexPosition>();
 
@@ -46,7 +46,7 @@ class HexBoardView : MonoBehaviour
 
     private void OnEnable()
     {
-        var positionViews = GetComponentsInChildren<HexPositionView>();
+        var positionViews = GetComponentsInChildren<HexPositionView>(true);
         foreach (var positionView in positionViews)
         {
             _positionViews.Add(positionView.GridPosition, positionView); //Add all the tiles to the list 
@@ -66,12 +66,12 @@ class HexBoardView : MonoBehaviour
     protected virtual void OnCardDropped(PositionEventArgs e) // Rising the event, telling to all listener 
     {
         var handler = CardDropped;
-        handler?.Invoke(this, e); //Null
+        handler?.Invoke(this, e); 
     }
 
     protected virtual void OnCardHovered(PositionEventArgs e) // Rising the event, telling to all listener 
     {
         var handler = CardHovered;
-        handler?.Invoke(this, e); //Null
+        handler?.Invoke(this, e); 
     }
 }

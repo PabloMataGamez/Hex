@@ -15,8 +15,10 @@ class CardExtra : CardMoveSet
         new Vector2Int(-1, 0),new Vector2Int(-1, +1), new Vector2Int(0, +1)
     };
 
+
     public CardExtra(HexBoard board, HexEngine engine) : base(board, engine)
     {
+
     }
 
     public override bool Execute(HexPosition hoverPosition, CardView cardView)
@@ -27,18 +29,7 @@ class CardExtra : CardMoveSet
 
         foreach (var validPosition in validPositions)
         {
-            Vector2Int direction = Vector2Int.zero;
-            direction.x = validPosition.Q - HexEngine.PlayerPosition.Q;
-            direction.y = validPosition.R - HexEngine.PlayerPosition.R; //Direction
-
-            HexPosition newPosition = new HexPosition
-                 (validPosition.Q + direction.x, validPosition.R + direction.y); //New position
-
-            if (!HexBoard.IsValid(newPosition)) //Isn't a valid position
-                HexBoard.Take(validPosition);
-
-            if (!HexBoard.TryGetPieceAt(newPosition, out var piece))
-                HexBoard.Move(validPosition, newPosition);
+            HexBoard.Take(validPosition);
         }
 
         return true;
@@ -48,11 +39,11 @@ class CardExtra : CardMoveSet
     {
         var validPositions = new List<HexPosition>();
 
-        Vector2Int initialDirection = _directions[4]; // -1, 0
+        Vector2Int initialDirection = _directions[4]; // +1 -1
 
         var currentPosition = new HexPosition //Offset in corner 4 added
-            (HexEngine.PlayerPosition.Q + initialDirection.x,
-            HexEngine.PlayerPosition.R + initialDirection.y);
+            (hoverPosition.Q + initialDirection.x,
+            hoverPosition.R + initialDirection.y);
 
         for (int i = 0; i < 6; i++)
         {
@@ -65,17 +56,19 @@ class CardExtra : CardMoveSet
                 currentPosition = new HexPosition(currentPosition.Q + direction.x, currentPosition.R + direction.y);
             }
         }
+        validPositions.Add(hoverPosition);
 
-        if (validPositions.Contains(hoverPosition)) //REVISE
-        {
-            List<HexPosition> filteredValidPositions = new List<HexPosition>();
-            foreach (var validPosition in validPositions)
-            {
-                if (validPosition.Equals(hoverPosition) || CheckRange(hoverPosition, validPosition) == 2)
-                    filteredValidPositions.Add(validPosition);
-            }
-            return filteredValidPositions;
-        }
+        /* if (validPositions.Contains(hoverPosition)) //REVISE
+         {
+
+             List<HexPosition> filteredValidPositions = new List<HexPosition>();
+             foreach(var validPosition in validPositions)
+             { 
+                 if (validPosition.Equals(hoverPosition) || CheckRange(hoverPosition, validPosition) == 1) 
+                     filteredValidPositions.Add(validPosition);
+             }
+             return filteredValidPositions;
+         }*/
 
         return validPositions;
     }

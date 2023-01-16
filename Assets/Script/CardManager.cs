@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
+public class CardManager : MonoBehaviour 
 {
     public int _cardsInTable = 0;
     private int _totalCards;
@@ -31,22 +31,11 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
     private void Awake()
     {
         _cardList = new List<GameObject>();
-        _canvasParent = FindObjectOfType<Canvas>();
-
-        for (int i = 0; i < 5; i++)
-        {
-           // AddNewCard();
-        }
-    }
-
-    void Update()
-    {
-        // CardsInTable();
-    }
+        _canvasParent = FindObjectOfType<Canvas>();      
+    }  
 
     public void AddNewCard(Transform transform)
     {
-
         if (_totalCards < _maxTotalCards && _cardsInTable < _maxCardsInTable)
         {
             int random = Random.Range(1, 5);
@@ -55,58 +44,29 @@ public class CardManager : MonoBehaviour //NEEDS TO BE ACTUALIZE
             {
                 GameObject newCard = Instantiate(_card1, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
-               // _cardList.Add(newCard);
             }
             else if (random == 2)
             {
                 GameObject newCard = Instantiate(_card2, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
-               // _cardList.Add(newCard);
             }
             else if (random == 3)
             {
                 GameObject newCard = Instantiate(_card3, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
-               // _cardList.Add(newCard);
             }
             else if (random == 4)
             {
                 GameObject newCard = Instantiate(_card4, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
-                //_cardList.Add(newCard);
             }
             else if (random == 5)
             {
                 GameObject newCard = Instantiate(_card5, new Vector3(transform.position.x, transform.position.y, transform.position.z),
                     Quaternion.identity, _canvasParent.transform);
-                //_cardList.Add(newCard);
             }
             _totalCards++;
             _cardsInTable++;
-        }
-    }
-
-    private void CardsInTable() //With the list we created we assign a position to each card
-    {
-        if (_cardList.Count == 1)
-        {
-            
-        }
-        else if (_cardList.Count == 2)
-        {
-
-        }
-        else if (_cardList.Count == 3)
-        {
-
-        }
-        else if (_cardList.Count == 4)
-        {
-
-        }
-        else if (_cardList.Count == 5)
-        {
-
         }
     }
 }

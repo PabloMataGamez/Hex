@@ -26,7 +26,7 @@ public class CardMoveSetCollection
 
 
         _moveSets.Add(CardType.Extra,
-                 new CardExtra(board, engine));
+                   new CardExtra(board, engine));
 
         this._engine = engine;
     }

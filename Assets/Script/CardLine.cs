@@ -23,13 +23,13 @@ public class CardLine : CardMoveSet
 
         foreach (var validPosition in validPositions)
         {
-            HexBoard.Take(validPosition);
+            HexBoard.Take(validPosition);            
         }
 
         return true;
     }
 
-    public override List<HexPosition> Positions(HexPosition hoverPosition) //CONTAINS PLAYER POSITION TOO
+    public override List<HexPosition> Positions(HexPosition hoverPosition) 
     {
         var validPositions = new List<HexPosition>();
        
